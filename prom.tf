@@ -8,10 +8,10 @@ module "vpc" {
   source = "git::https://github.com/therodfather/Scripts.git"
 }
 
-data "vultr_ssh_key" "my_ssh_key" {
+data "vultr_ssh_key" "my-ssh-key" {
   filter {
-    name   = "my_ssh_key"
-    values = ["my_ssh_key"]
+    name   = "my-ssh-key"
+    values = ["my-ssh-key"]
   }
 }
   

@@ -4,7 +4,7 @@ provider "vultr" {
   retry_limit = 3
 }
 
-module "consul" {
+module "vpc" {
   source = "git::https://github.com/therodfather/Scripts.git"
 }
 
@@ -19,7 +19,17 @@ resource "vultr_server" "my_server" {
     auto_backup = false
     ddos_protection = false
     notify_activate = false
-    user_data = "${file("installpro.sh")}"
+    provisioner "file" {
+      source      = "installpro.sh"
+      destination = "/tmp/script.sh"
+    }
+
+    provisioner "remote-exec" {
+      inline = [
+        "chmod +x /tmp/script.sh",
+        "/tmp/script.sh args",
+      ]
+    }
 }
 
 output "vultr_server" {

@@ -18,7 +18,7 @@ resource "vultr_server" "my_server" {
 }
 
 module "consul" {
-  source = "https://github.com/therodfather/Scripts.git"
+  source = "https://github.com/therodfather/Scripts"
   user_data = "${file("installpro.sh")}"
 }
 

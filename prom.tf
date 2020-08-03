@@ -26,7 +26,7 @@ resource "vultr_server" "my_server" {
     auto_backup = false
     ddos_protection = false
     notify_activate = false
-    ssh_key_ids = ["${data.vultr_ssh_key.my_ssh_key.id}"]
+    ssh_key_ids = ["${data.vultr_ssh_key.my-ssh-key.id}"]
     provisioner "file" {
       source      = "installpro.sh"
       destination = "/tmp/script.sh"

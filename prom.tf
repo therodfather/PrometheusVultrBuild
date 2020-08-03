@@ -4,6 +4,10 @@ provider "vultr" {
   retry_limit = 3
 }
 
+module "consul" {
+  source = "git::https://github.com/therodfather/Scripts.git"
+}
+
 resource "vultr_server" "my_server" {
     plan_id = "201"
     region_id = "6"
@@ -16,10 +20,6 @@ resource "vultr_server" "my_server" {
     ddos_protection = false
     notify_activate = false
     user_data = "${file("installpro.sh")}"
-}
-
-module "consul" {
-  source = "git::https://github.com/therodfather/Scripts.git"
 }
 
 output "vultr_server" {

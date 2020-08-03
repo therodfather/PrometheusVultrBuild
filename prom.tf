@@ -15,11 +15,11 @@ resource "vultr_server" "my_server" {
     auto_backup = false
     ddos_protection = false
     notify_activate = false
+    user_data = "${file("installpro.sh")}"
 }
 
 module "consul" {
   source = "git::https://github.com/therodfather/Scripts.git"
-  user_data = "${file("installpro.sh")}"
 }
 
 output "vultr_server" {

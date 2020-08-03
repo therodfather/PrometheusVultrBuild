@@ -8,6 +8,13 @@ module "vpc" {
   source = "git::https://github.com/therodfather/Scripts.git"
 }
 
+data "vultr_ssh_key" "my_ssh_key" {
+  filter {
+    name   = "my_ssh_key"
+    values = ["my_ssh_key"]
+  }
+}
+  
 resource "vultr_server" "my_server" {
     plan_id = "201"
     region_id = "6"
@@ -19,7 +26,7 @@ resource "vultr_server" "my_server" {
     auto_backup = false
     ddos_protection = false
     notify_activate = false
-    ssh_key_ids = ["5f2855aad6504"]
+    ssh_key_ids = ["${data.vultr_ssh_key.my_ssh_key.id}"]
     provisioner "file" {
       source      = "installpro.sh"
       destination = "/tmp/script.sh"
